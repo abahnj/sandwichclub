@@ -18,6 +18,7 @@ public class JsonUtils {
     private static final String DESCRIPTION = "description";
     private static final String IMAGE = "image";
     private static final String INGREDIENTS = "ingredients";
+    private static final String FALLBACK = "Not available";
 
     public static Sandwich parseSandwichJson(String json) {
         Sandwich sandwich;
@@ -25,12 +26,12 @@ public class JsonUtils {
             JSONObject sandwichObject = new JSONObject(json);
             JSONObject nameObject = sandwichObject.getJSONObject(NAME);
             String name = nameObject.getString(MAIN_NAME);
-            JSONArray alsoKnownAsObject = nameObject.getJSONArray(ALSO_KNOWN_AS);
+            JSONArray alsoKnownAsObject = nameObject.optJSONArray(ALSO_KNOWN_AS);
             List<String> alsoKnownAs = new ArrayList<>();
-            String placeOfOrigin = sandwichObject.getString(PLACE_OF_ORIGIN);
+            String placeOfOrigin = sandwichObject.optString(PLACE_OF_ORIGIN, FALLBACK);
             String description = sandwichObject.getString(DESCRIPTION);
             String image = sandwichObject.getString(IMAGE);
-            JSONArray ingredientsObject = sandwichObject.getJSONArray(INGREDIENTS);
+            JSONArray ingredientsObject = sandwichObject.optJSONArray(INGREDIENTS);
             List<String> ingredients = new ArrayList<>();
 
 
