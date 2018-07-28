@@ -77,10 +77,10 @@ public class DetailActivity extends AppCompatActivity {
 
     private void populateUI(Sandwich sandwich) {
         String alsoKnownAs = sandwich.getAlsoKnownAs() != null &&
-                sandwich.getAlsoKnownAs().size() == 0
+                sandwich.getAlsoKnownAs().size() != 0
                 ? getString(sandwich.getAlsoKnownAs()) : "Data not available";
-        String placeOfOrigin = sandwich.getPlaceOfOrigin() != null
-                ? getString(sandwich.getAlsoKnownAs()) : "Data not available";
+        String placeOfOrigin = !sandwich.getPlaceOfOrigin().equals("")
+                ? sandwich.getPlaceOfOrigin() : "Data not available";
 
         alsoKnownAsTv.setText(alsoKnownAs);
         placeOfOriginTv.setText(placeOfOrigin);
